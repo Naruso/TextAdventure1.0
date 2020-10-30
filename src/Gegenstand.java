@@ -1,9 +1,14 @@
-public class Gegenstand {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Gegenstand extends Objekt{
 
     // Anfang Attribute
     public String name;
     public boolean benutzbar;
     public int damage;
+    //List<String> itemList = new ArrayList<String>();
+
     // Ende Attribute
 
     public Gegenstand(String name, boolean benutzbar, int damage)
@@ -35,6 +40,11 @@ public class Gegenstand {
 
     public void setDamage(int damageNeu) {
         damage = damageNeu;
+    }
+
+    public String ToString()
+    {
+        return getName() + getBenutzbar() + getDamage();
     }
 
     // Ende Methoden

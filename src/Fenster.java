@@ -1,8 +1,8 @@
-public class Fenster {
+public class Fenster extends Raum{
 
     // Anfang Attribute
     public String name;
-    public boolean offen;
+    private boolean offen;
     // Ende Attribute
 
     //Anfang Konstruktor

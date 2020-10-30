@@ -3,6 +3,7 @@ public class Tuer {
     // Anfang Attribute
     public String name;
     public boolean offen;
+
     // Ende Attribute
 
     public Tuer(String name, boolean offen)

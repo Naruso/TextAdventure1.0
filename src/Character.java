@@ -1,17 +1,17 @@
-public class Character {
+import java.util.ArrayList;
+
+public class Character extends Objekt {
 
     // Anfang Attribute
-    public String name;
-    public int healthPoints;
-    public int inventar;
+    private int healthPoints;
     public String ability;
+    private ArrayList<String> items = new ArrayList<>();
     // Ende Attribute
 
-    public Character (String name, int healthPoints, int inventar, String ability)
+    public Character (String name, int healthPoints , String ability)
     {
         this.name = name;
-        this.healthPoints = healthPoints;
-        this.inventar= inventar;
+        this.healthPoints = healthPoints;;
         this.ability = ability;
     }
 
@@ -32,13 +32,13 @@ public class Character {
         healthPoints = healthPointsNeu;
     }
 
-    public int getInventar() {
+    /*public int getInventar() {
         return inventar;
     }
 
     public void setInventar(int inventarNeu) {
         inventar = inventarNeu;
-    }
+    }*/
 
     public String getAbility() {
         return ability;
@@ -47,6 +47,25 @@ public class Character {
     public void setAbility(String abilityNeu) {
         ability = abilityNeu;
     }
+    public void getInventory()
+    {
+        System.out.println(items.toString());
+    }
+    public boolean pickItem(Gegenstand item)
+    {
+        if (item != null)
+        {
+            items.add(item.getName());
+            System.out.println("Du hast das Item " + item.getName() + " erhalten.");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
 
     // Ende Methoden
 } // end of Character
