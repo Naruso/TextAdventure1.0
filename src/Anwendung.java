@@ -1,7 +1,7 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-//TEST//
 
 public class Anwendung {
 
@@ -10,7 +10,7 @@ public class Anwendung {
     public static void main(String[] args) {
 
         System.out.println("Gude und willkommen bei unserem Text Adventure. ");
-        System.out.println("Gib Start ein um das Spiel zu starten oder Exit um das Spiel zu verlassen.");
+        System.out.println("Gib start ein um das Spiel zu starten oder Exit um das Spiel zu verlassen.");
 
         Scanner scanner = new Scanner(System.in);
         String eingabeStart = scanner.nextLine();
@@ -67,7 +67,7 @@ public class Anwendung {
         Tuer tuer3 = new Tuer("hintere Tür", false);
 
         //Räume
-        Raum raum107 = new Raum("Raum III-107", 2, 1, false, item1, fensterRaum107, fenster2Raum107);
+        Raum raum107 = new Raum("Raum III-107", 2, 1, false, item1, fensterRaum107, fenster2Raum107, tuerRechts, tuerLinks);
         Raum raum108 = new Raum("Raum III-108", 2, 1, false, item2);
         Raum flur = new Raum("Flur", 5, 0, true, item3);
         Raum gang = new Raum("Gang", 7, 0, false,item4);
@@ -75,19 +75,22 @@ public class Anwendung {
 
         System.out.println("Du wachst mitten in der Nacht im Klassenraum: " + raum107.getName() + " auf");
         System.out.println("Du kannst dich nur noch an den Abendunterricht erinnern.");
-        System.out.println("Was möchtest du tun? Schreibe   look   um dich umzusehen...");
 
-        String sLook = scanner.nextLine();
 
-        if (sLook.equals("look"))
-        {
-           System.out.println(raum107.getItems());
+        String sLook;
+
+        do {
+            System.out.println("Was möchtest du tun? Schreibe  look  um dich umzusehen...");
+            sLook = scanner.nextLine();
         }
-        System.out.println("Gib pick ein um den Gegendstand zu nehmen");
+        while(!sLook.equals("look"));
+        System.out.println("Folgende Objekte befinden sich im Raum: " + raum107.getItems());
+
+
+
+        System.out.println("Gebe  pick  ein um einen Gegendstand zu nehmen");
         String sPick = scanner.nextLine();
-
-        if(sPick.equals("pick smartphone".toLowerCase()))
-
+        if(sPick.equals("pick smartphone".toLowerCase()) || sPick.equals("pick".toLowerCase()))
         {
             spieler.pickItem(item1);
             System.out.println("Du hast " + item1.getName() + " in dein Inventar gepackt!");
@@ -97,7 +100,16 @@ public class Anwendung {
         {
             System.out.println("Die Fenster sind geschlossen!");
         }
+        System.out.println("Gebe show inventory ein um das Inventar zu öffnen");
+        String sShowInventory = scanner.nextLine();
 
+        if(sShowInventory.equals("show inventory".toLowerCase()))
+        {
+            spieler.getInventory();
+        }
+
+        System.out.println("Was möchtest du tun? Schreibe  look  um dich umzusehen...");
+        //TEST
 
 
        /* System.out.println(spieler.getName());
