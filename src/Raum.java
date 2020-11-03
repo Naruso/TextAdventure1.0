@@ -73,6 +73,22 @@ public class Raum extends Objekt{
         this.items.add(tuer1.getName());
         this.items.add(tuer2.getName());
     }
+    public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Gegenstand item1, Gegenstand item2, Gegenstand item3, Gegenstand item4, Gegenstand item5, Fenster fenster1, Tuer tuer1, Tuer tuer2)
+    {
+        this.name = name;
+        this.anzahlTueren = anzahlTueren;
+        this.anzahlFenster = anzahlFenster;
+        this.npc = npc;
+        this.items.add(item1.getName());
+        this.items.add(item2.getName());
+        this.items.add(item3.getName());
+        this.items.add(item4.getName());
+        this.items.add(item5.getName());
+        this.items.add(fenster1.getName());
+        this.items.add(tuer1.getName());
+        this.items.add(tuer2.getName());
+    }
+
     public Raum()
     {
 

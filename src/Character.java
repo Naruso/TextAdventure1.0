@@ -5,6 +5,7 @@ public class Character extends Objekt {
     // Anfang Attribute
     private int healthPoints;
     public String ability;
+    public Raum standort;
     private ArrayList<String> items = new ArrayList<>();
     // Ende Attribute
 
@@ -63,7 +64,12 @@ public class Character extends Objekt {
         {
             return false;
         }
+    }
 
+    public void move(Raum zielRaum)
+    {
+        standort = zielRaum;
+        System.out.println("Du befindest dich nun im " + standort.getName() + ".");
     }
 
 
