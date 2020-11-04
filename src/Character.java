@@ -1,6 +1,4 @@
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Character extends Objekt {
 
@@ -9,7 +7,6 @@ public class Character extends Objekt {
     public String ability;
     public Raum standort;
     public ArrayList<String> items = new ArrayList<>();
-
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
@@ -32,15 +29,8 @@ public class Character extends Objekt {
         return healthPoints;
     }
 
-    public void setHealthPoints(int healthPointsNeu)
-
-    {
+    public void setHealthPoints(int healthPointsNeu) {
         healthPoints = healthPointsNeu;
-        if (healthPoints == 0) {
-            System.out.println("");
-            System.out.println("Du bist Tod!");
-            System.exit(0);
-        }
     }
 
     /*public int getInventar() {

@@ -89,7 +89,7 @@ public class Anwendung {
     }
 
 
-        //Erster Raum
+    //Erster Raum
     public static void raum107() {
         String sLook;
 
@@ -291,7 +291,7 @@ public class Anwendung {
                 continue;
             }
         }
-      
+
     }
 
     //gude test bitte ignorieren danke
