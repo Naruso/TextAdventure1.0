@@ -1,11 +1,15 @@
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Character extends Objekt {
 
     // Anfang Attribute
     private int healthPoints;
     public String ability;
-    private ArrayList<String> items = new ArrayList<>();
+    public Raum standort;
+    public ArrayList<String> items = new ArrayList<>();
+
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
@@ -28,8 +32,15 @@ public class Character extends Objekt {
         return healthPoints;
     }
 
-    public void setHealthPoints(int healthPointsNeu) {
+    public void setHealthPoints(int healthPointsNeu)
+
+    {
         healthPoints = healthPointsNeu;
+        if (healthPoints == 0) {
+            System.out.println("");
+            System.out.println("Du bist Tod!");
+            System.exit(0);
+        }
     }
 
     /*public int getInventar() {
@@ -63,7 +74,12 @@ public class Character extends Objekt {
         {
             return false;
         }
+    }
 
+    public void move(Raum zielRaum)
+    {
+        standort = zielRaum;
+        System.out.println("Du befindest dich nun im " + standort.getName() + ".");
     }
 
 
