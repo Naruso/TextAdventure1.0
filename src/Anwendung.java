@@ -96,11 +96,17 @@ public class Anwendung {
         System.out.println("Gebe  pick  ein um einen Gegendstand zu nehmen");
         System.out.println("oder  go  um mit einer Tür oder einem Fenster zu interagieren.");
         String sPickorGo;
+
         sPickorGo = scanner.nextLine();
         switch (sPickorGo) {
             case "pick smartphone":
                 spieler.pickItem(item1);
                 System.out.println("Du hast " + item1.getName() + " in dein Inventar gepackt!");
+                if (spieler.items.contains("Smartphone")) {
+                    System.out.println("Das Smartphone ist im Inventar");
+                } else {
+                    System.out.println("Du hast kein Smartphone du Knecht.");
+                }
                 break;
             case "go right door":
                 System.out.println("");
@@ -122,7 +128,6 @@ public class Anwendung {
                 System.out.println("");
                 // while (sPickorGo.equals("pick smartphone") || !sPickorGo.equals("go right door") || !sPickorGo.equals("go left door") || !sPickorGo.equals("go right fenster") || !sPickorGo.equals("go left fenster"));
         }
-
                 System.out.println("");
                 System.out.println("Gebe show inventory ein um das Inventar zu öffnen");
                 String sShowInventory = scanner.nextLine();

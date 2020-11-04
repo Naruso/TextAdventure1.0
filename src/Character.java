@@ -6,7 +6,7 @@ public class Character extends Objekt {
     private int healthPoints;
     public String ability;
     public Raum standort;
-    private ArrayList<String> items = new ArrayList<>();
+    public ArrayList<String> items = new ArrayList<>();
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
