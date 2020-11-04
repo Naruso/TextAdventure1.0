@@ -273,7 +273,7 @@ public class Anwendung {
         System.out.println("Was willst du tun?.");
         String sPickorGo;
         sPickorGo = scanner.nextLine().toLowerCase();
-
+//TEST
         while (true) {
             if (sPickorGo.equals("use taschenlampe")) {
                 System.out.println();
