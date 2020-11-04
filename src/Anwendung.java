@@ -294,4 +294,5 @@ public class Anwendung {
 
     }
 
+
 }// end of class TextAdventure
