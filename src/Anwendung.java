@@ -293,6 +293,7 @@ public class Anwendung {
         }
 
     }
+    //gude test bitte ignorieren danke
 
 
 }// end of class TextAdventure
