@@ -1,6 +1,4 @@
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Character extends Objekt {
 
@@ -8,8 +6,8 @@ public class Character extends Objekt {
     private int healthPoints;
     public String ability;
     public Raum standort;
+    private boolean _hasItem = false;
     public ArrayList<String> items = new ArrayList<>();
-
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
@@ -33,23 +31,18 @@ public class Character extends Objekt {
     }
 
     public void setHealthPoints(int healthPointsNeu)
-
     {
         healthPoints = healthPointsNeu;
-        if (healthPoints == 0) {
-            System.out.println("");
+        if (healthPoints <= 0)
+        {
             System.out.println("Du bist Tod!");
             System.exit(0);
         }
+        else
+        {
+            System.out.println("Du hast " + healthPoints +" HP übrig. Pass besser auf!");
+        }
     }
-
-    /*public int getInventar() {
-        return inventar;
-    }
-
-    public void setInventar(int inventarNeu) {
-        inventar = inventarNeu;
-    }*/
 
     public String getAbility() {
         return ability;
@@ -80,6 +73,25 @@ public class Character extends Objekt {
     {
         standort = zielRaum;
         System.out.println("Du befindest dich nun im " + standort.getName() + ".");
+    }
+    public boolean hasItem(Gegenstand item)
+    {
+        if (items.contains(item.name)) {
+            _hasItem = true;
+        }
+        return _hasItem;
+    }
+
+    public void useItem(Gegenstand item)
+    {
+        if (items.contains(item.name)) {
+            _hasItem = true;
+            System.out.println("Du benutzt " + item + "!");
+        }
+        else {
+            System.out.println("Du kannst nicht etwas benutzen, was du nicht hast!");
+        }
+
     }
 
 

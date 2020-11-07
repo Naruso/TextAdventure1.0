@@ -7,6 +7,7 @@ public class Gegenstand extends Objekt{
     public String name;
     public boolean benutzbar;
     public int damage;
+
     //List<String> itemList = new ArrayList<String>();
 
     // Ende Attribute
@@ -46,6 +47,7 @@ public class Gegenstand extends Objekt{
     {
         return getName() + getBenutzbar() + getDamage();
     }
+
 
     // Ende Methoden
 } // end of Gegenstand

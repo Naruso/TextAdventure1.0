@@ -61,6 +61,15 @@ public class Raum extends Objekt{
         this.items.add(fenster2.getName());
         this.items.add(tuer1.getName());
     }
+    public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Gegenstand item, Tuer tuer1)
+    {
+        this.name = name;
+        this.anzahlTueren = anzahlTueren;
+        this.anzahlFenster = anzahlFenster;
+        this.npc = npc;
+        this.items.add(item.getName());
+        this.items.add(tuer1.getName());
+    }
     public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Gegenstand item, Fenster fenster1, Fenster fenster2, Tuer tuer1, Tuer tuer2)
     {
         this.name = name;
@@ -126,6 +135,11 @@ public class Raum extends Objekt{
         npc = npcNeu;
     }
     public ArrayList<String> getItems() {
+        return items;
+    }
+    public ArrayList<String> removeItems(int i)
+    {
+        this.items.remove(i);
         return items;
     }
 
