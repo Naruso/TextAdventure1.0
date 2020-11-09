@@ -9,6 +9,7 @@ public class Anwendung {
     boolean won = false;
     boolean lost = false;
     static Scanner scanner = new Scanner(System.in);
+    static boolean roomChanged = false;
 
     //Spielercharakter wird erstellt
     static Character spieler = new Character(null, 100, "Gude sagen");
@@ -112,6 +113,7 @@ public class Anwendung {
         while (true) {
             if (sPickorGo.equals("pick smartphone")) {
                 System.out.println();
+                //spieler.pickItemV2(iSmartphone);
                 spieler.pickItem(iSmartphone);
                 raum107.removeItems(0);
                 System.out.println("Du hast " + iSmartphone.getName() + " in dein Inventar gepackt!");
@@ -137,6 +139,7 @@ public class Anwendung {
                 System.out.println("");
                 System.out.println("Die Tür ist offen und du gehst hindurch.");
                 spieler.move(raum108);
+                roomChanged = true;
                 System.out.println("");
                 raum108();
             } else if (sPickorGo.equals("go fenster rechts")) {
@@ -147,7 +150,14 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("Du bist aus dem offenen Fenster gesprungen und hast dir alle Knochen gebrochen. Toll gemacht!");
                 spieler.setHealthPoints(0);
-            } else {
+            }
+            else if(sPickorGo.equals("show inventory")){
+                System.out.println();
+                spieler.getInventory();
+                System.out.println();
+                sPickorGo = scanner.nextLine();
+                }
+            else {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
                 System.out.println();
@@ -161,20 +171,20 @@ public class Anwendung {
 
 
     public static void raum108() {
-        String sLook2;
+        String sPickorGo;
 
         do {
             System.out.println("Was möchtest du tun? Schreibe  look  um dich umzusehen...");
-            sLook2 = scanner.nextLine().toLowerCase();
+            sPickorGo = scanner.nextLine().toLowerCase();
         }
-        while (!sLook2.equals("look"));
+        while (!sPickorGo.equals("look"));
         System.out.println("");
         System.out.println("Folgende Objekte befinden sich im Raum: " + raum108.getItems());
         System.out.println("");
         System.out.println("Gebe  pick  ein um einen Gegendstand aufzunehmen");
         System.out.println("go  um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
         System.out.println("oder use um Gegenstände in deinem Inventar zu benutzen.");
-        String sPickorGo;
+       // String sPickorGo;
         sPickorGo = scanner.nextLine().toLowerCase();
         while (true) {
             if (sPickorGo.equals("pick taschenlampe")) {
@@ -202,6 +212,7 @@ public class Anwendung {
                 System.out.println("Gib pick ein um die Taschenlampe aufzunehmen!");
                 sPickorGo = scanner.nextLine().toLowerCase();
                 if (sPickorGo.equals("pick")) {
+                    //spieler.pickItemV2(iTaschenlampe);
                     spieler.pickItem(iTaschenlampe);
                     raum108.removeItems(0);
                     System.out.println("Du hast " + iTaschenlampe.getName() + " in dein Inventar gepackt!");
@@ -222,6 +233,7 @@ public class Anwendung {
                 System.out.println("Gib pick ein um den Schlüssel aufzunehmen!");
                 sPickorGo = scanner.nextLine().toLowerCase();
                 if (sPickorGo.equals("pick")) {
+                    //spieler.pickItemV2(iSchluesselR107);
                     spieler.pickItem(iSchluesselR107);
                     raum108.removeItems(4);
                     System.out.println("Du hast " + iSchluesselR107.getName() + " in dein Inventar gepackt!");
@@ -279,12 +291,28 @@ public class Anwendung {
                     }
 
                 }
+                else if (sPickorGo.equals("go tür links")) {
+                    System.out.println();
+                    System.out.println("Du gehst wieder zurück in Raum III-107.");
+                    System.out.println();
+                    spieler.move(raum107);
+                    raum107();
+                }
                 else{
                     System.out.println();
                     System.out.println("Auf dem Lehrerpult liegen einige Dokumente.");
                     sPickorGo = scanner.nextLine().toLowerCase();
                 }
-            } else {
+            }
+            else if(sPickorGo.equals("show inventory")){
+                System.out.println();
+                spieler.getInventory();
+                System.out.println();
+                System.out.println("Was willst du als nächstes tun?");
+                sPickorGo = scanner.nextLine();
+
+            }
+            else {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
                 System.out.println();
