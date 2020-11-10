@@ -32,7 +32,7 @@ public class Raum extends Objekt{
         this.items.add(item.getName());
     }
 
-    public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Gegenstand item, Fenster fenster)
+    public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Tuer item, Tuer fenster)
     {
         this.name = name;
         this.anzahlTueren = anzahlTueren;
@@ -121,7 +121,7 @@ public class Raum extends Objekt{
     public Raum()
     {
 
-    };
+    }
     // Anfang Methoden
     public String getName() {
         return name;
