@@ -9,13 +9,16 @@ public class Anwendung {
     boolean won = false;
     boolean lost = false;
     static Scanner scanner = new Scanner(System.in);
+    static boolean roomChanged = false;
 
     //Spielercharakter wird erstellt
     static Character spieler = new Character(null, 100, "Gude sagen");
 
     //Generiere NPCs
-    public static NPC nPC1 = new NPC("Schulleiter", false, 500, 30);
-    NPC nPC2 = new NPC("Brühne", true, 100, 10);
+    public static NPC npcSchulleiter = new NPC("Schulleiter", false, 500, 30);
+    public static NPC npcUnbekanntePerson = new NPC("Unbekannte Person", false, 20, 10);
+    public static NPC npcZombieSchulleiter = new NPC( "Zombier Schulleiter", false, 1000, 100);
+    public static NPC npcBruehne = new NPC("Brühne", true, 100, 10);
     NPC nPC3 = new NPC("Person im Flur", true, 1, 0);
 
     //Gegenstände
@@ -26,7 +29,7 @@ public class Anwendung {
     static Gegenstand iDeckenplatte = new Gegenstand("Deckenplatte", true, 0);
     static Gegenstand iSchluesselR107 = new Gegenstand("Key107", true, 0);
     static Gegenstand item3 = new Gegenstand("keine Gegenstände", false, 0);
-    static Gegenstand item4 = new Gegenstand("Legendärer Feuerlöscher", true, 170);
+    static Gegenstand iLegendaererFeuerloescher = new Gegenstand("Legendärer Feuerlöscher", true, 170);
 
     //Fenster
     //Fenster im ersten Raum
@@ -41,13 +44,18 @@ public class Anwendung {
     static Tuer tuerRaum108 = new Tuer("Tür rechts", false);
     //Türen im zweiten Raum III-108
     static Tuer tuer3 = new Tuer("hintere Tür", false);
+    static Tuer tuerZumFoyer = new Tuer("hintere Tür", false);
+    //Türen/Treppen im Flur
+    static Tuer tuerZurTreppe = new Tuer ("Treppe links", true);
+    static Tuer tuerZumZweitenOG = new Tuer ("Treppe links", true);
 
     //Räume
     static Raum raum108 = new Raum("Raum III-108", 2, 1, false, iTaschenlampe, iLosesKabel, iLehrerPult, iDeckenplatte, iSchluesselR107, fensterRaum108, tuerLinks, tuerRaum108);
     static Raum raum107 = new Raum("Raum III-107", 2, 1, false, iSmartphone, fensterRaum107, fenster2Raum107, tuerRechts, tuerLinks);
-    static Raum flur = new Raum("Flur", 5, 0, true, item3, tuerRechts);
-
-    static Raum gang = new Raum("Gang", 7, 0, false, item4);
+    static Raum flur = new Raum("Flur", 5, 0, true, tuerRechts, tuerZurTreppe, npcUnbekanntePerson);
+    static Raum treppe = new Raum( "Treppe links", 2, 0,true, tuerZurTreppe, tuerZumFoyer, npcZombieSchulleiter );
+    //static Raum gang = new Raum("Gang", 7, 0, false, item4);
+    static Raum zweitesOG = new Raum("2. Obergeschoss", 4, 2, true, tuerZumZweitenOG, npcBruehne);
     //Raum raum2OG = new Raum("Raum 2.OG", 1, 1, true, item5);
 
 
@@ -112,6 +120,7 @@ public class Anwendung {
         while (true) {
             if (sPickorGo.equals("pick smartphone")) {
                 System.out.println();
+                //spieler.pickItemV2(iSmartphone);
                 spieler.pickItem(iSmartphone);
                 raum107.removeItems(0);
                 System.out.println("Du hast " + iSmartphone.getName() + " in dein Inventar gepackt!");
@@ -137,6 +146,7 @@ public class Anwendung {
                 System.out.println("");
                 System.out.println("Die Tür ist offen und du gehst hindurch.");
                 spieler.move(raum108);
+                roomChanged = true;
                 System.out.println("");
                 raum108();
             } else if (sPickorGo.equals("go fenster rechts")) {
@@ -147,7 +157,14 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("Du bist aus dem offenen Fenster gesprungen und hast dir alle Knochen gebrochen. Toll gemacht!");
                 spieler.setHealthPoints(0);
-            } else {
+            }
+            else if(sPickorGo.equals("show inventory")){
+                System.out.println();
+                spieler.getInventory();
+                System.out.println();
+                sPickorGo = scanner.nextLine();
+                }
+            else {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
                 System.out.println();
@@ -161,20 +178,19 @@ public class Anwendung {
 
 
     public static void raum108() {
-        String sLook2;
-
+        String sPickorGo;
         do {
             System.out.println("Was möchtest du tun? Schreibe  look  um dich umzusehen...");
-            sLook2 = scanner.nextLine().toLowerCase();
+            sPickorGo = scanner.nextLine().toLowerCase();
         }
-        while (!sLook2.equals("look"));
+        while (!sPickorGo.equals("look"));
         System.out.println("");
         System.out.println("Folgende Objekte befinden sich im Raum: " + raum108.getItems());
         System.out.println("");
         System.out.println("Gebe  pick  ein um einen Gegendstand aufzunehmen");
         System.out.println("go  um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
         System.out.println("oder use um Gegenstände in deinem Inventar zu benutzen.");
-        String sPickorGo;
+       // String sPickorGo;
         sPickorGo = scanner.nextLine().toLowerCase();
         while (true) {
             if (sPickorGo.equals("pick taschenlampe")) {
@@ -194,7 +210,6 @@ public class Anwendung {
                 } else {
                     System.out.println("Was willst du als nächstes tun?");
                     sPickorGo = scanner.nextLine();
-
                 }
             } else if (sPickorGo.equals("go lehrerpult")) {
                 System.out.println();
@@ -202,6 +217,7 @@ public class Anwendung {
                 System.out.println("Gib pick ein um die Taschenlampe aufzunehmen!");
                 sPickorGo = scanner.nextLine().toLowerCase();
                 if (sPickorGo.equals("pick")) {
+                    //spieler.pickItemV2(iTaschenlampe);
                     spieler.pickItem(iTaschenlampe);
                     raum108.removeItems(0);
                     System.out.println("Du hast " + iTaschenlampe.getName() + " in dein Inventar gepackt!");
@@ -222,8 +238,13 @@ public class Anwendung {
                 System.out.println("Gib pick ein um den Schlüssel aufzunehmen!");
                 sPickorGo = scanner.nextLine().toLowerCase();
                 if (sPickorGo.equals("pick")) {
+                    //spieler.pickItemV2(iSchluesselR107);
                     spieler.pickItem(iSchluesselR107);
-                    raum108.removeItems(4);
+                    if (!raum108.getItems().contains("Taschenlampe")) {
+                        raum108.removeItems(3);
+                    } else {
+                        raum108.removeItems(4);
+                    }
                     System.out.println("Du hast " + iSchluesselR107.getName() + " in dein Inventar gepackt!");
                 } else {
                     System.out.println();
@@ -231,6 +252,7 @@ public class Anwendung {
                 }
                 System.out.println();
                 System.out.println("Was willst du als nächstes tun?");
+                System.out.println(raum108.getItems());
                 sPickorGo = scanner.nextLine().toLowerCase();
 
             } else if (sPickorGo.equals("pick schlüssel für raum-107")) {
@@ -239,10 +261,10 @@ public class Anwendung {
                 System.out.println("Was willst du als nächstes tun?");
                 System.out.println();
                 sPickorGo = scanner.nextLine().toLowerCase();
-
             } else if (sPickorGo.equals("go fenster")) {
                 System.out.println();
                 System.out.println("Das Fenster ist geschlossen");
+                System.out.println();
                 System.out.println("Hier kommst du nicht raus! Was willst du als nächstes tun?");
                 System.out.println();
                 sPickorGo = scanner.nextLine().toLowerCase();
@@ -277,14 +299,28 @@ public class Anwendung {
                         raum108.removeItems(0);
                         System.out.println("Du hast " + iTaschenlampe.getName() + " in dein Inventar gepackt!");
                     }
-
+                }
+                else if (sPickorGo.equals("go tür links")) {
+                    System.out.println();
+                    System.out.println("Du gehst wieder zurück in Raum III-107.");
+                    System.out.println();
+                    spieler.move(raum107);
+                    raum107();
                 }
                 else{
                     System.out.println();
                     System.out.println("Auf dem Lehrerpult liegen einige Dokumente.");
                     sPickorGo = scanner.nextLine().toLowerCase();
                 }
-            } else {
+            }
+            else if(sPickorGo.equals("show inventory")){
+                System.out.println();
+                spieler.getInventory();
+                System.out.println();
+                System.out.println("Was willst du als nächstes tun?");
+                sPickorGo = scanner.nextLine();
+            }
+            else {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
                 System.out.println();
@@ -292,21 +328,19 @@ public class Anwendung {
                 sPickorGo = scanner.nextLine().toLowerCase();
             }
         }//end of while Schleife
-
     }//end of room108
 
     public static void flur() {
+
         String sLook3;
         if (spieler.hasItem(iTaschenlampe)) {
-
             System.out.println("Der Flur ist stockdunkel und du siehst nichts. Schreibe use um die Taschenlampe zu benutzen!");
             sLook3 = scanner.nextLine();
-            if (sLook3.equals("use")) {
+            if (sLook3.equals("use taschenlampe")) {
                 System.out.println();
                 System.out.println("Du benutzt deine Taschenlampe und kannst jemanden am Ende des Flurs erkennen.");
                 System.out.println();
             }
-
         } else {
             System.out.println("Ohne die Taschenlampe kommst du nicht weit!");
             System.out.println("Du solltest die Taschenlampe im Raum-108 finden.");
@@ -318,7 +352,6 @@ public class Anwendung {
             } else {
                 System.out.println("Du stolperst und brichst dir das Genick!");
                 spieler.setHealthPoints(0);
-
             }
         }
         do {
@@ -329,34 +362,99 @@ public class Anwendung {
         System.out.println("");
         System.out.println("Folgende Objekte befinden sich im Raum: " + flur.getItems());
         System.out.println("");
-        System.out.println("Geb   go ein um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
+        System.out.println("Gib   go ein um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
         System.out.println("oder use ein um Gegenstände in deinem Inventar zu benutzen.");
-        System.out.println("Du siehst nichts.");
-        System.out.println("Was willst du tun?.");
+        System.out.println("Was willst du tun?");
         String sPickorGo;
         sPickorGo = scanner.nextLine().toLowerCase();
 
         while (true) {
-            if (sPickorGo.equals("use taschenlampe")) {
+            if (sPickorGo.equals("go unbekannte person")) {
                 System.out.println();
-                System.out.println("Du benutzt deine Taschenlampe und kannst jemanden am Ende des Flurs erkennen.");
+                npcUnbekanntePerson.Says("Willkommen " + spieler.getName() + " ,was gibt's?");
                 System.out.println();
+                System.out.println("Was willst du als nächstes tun? Gib attack ein, um die unbekannte Person anzugreifen");
+                System.out.println("oder zuhören, um eventuell Hinweise zu erhalten.");
+                sPickorGo = scanner.nextLine();
+                if (sPickorGo.equals("attack")) {
+                    while (!npcUnbekanntePerson.isDead) {
+                        System.out.println();
+                        int newHPNPC = npcUnbekanntePerson.getHealthPoints() - iTaschenlampe.damage;
+                        npcUnbekanntePerson.setHealthPoints(newHPNPC);
+                        int newHP = spieler.getHealthPoints() - npcUnbekanntePerson.getDamage();
+                        spieler.setHealthPoints(newHP);
+                        if (spieler.getHealthPoints() <= 0) {
+                            System.out.println("Du hast den Kampf verloren und bist gestorben!");
+                            System.exit(0);
+                        }
+                        if (npcUnbekanntePerson.getHealthPoints() <= 0) {
+                            npcUnbekanntePerson.isDead = true;
+                            System.out.println("Du hast den Kampf gewonnen. Was willst du als nächstes tun?");
+                        } else {
+
+                            System.out.println("Dein Gegner steht noch. Was willst du als nächstes tun?");
+                        }
+                        sPickorGo = scanner.nextLine();
+                    }
+                } else {
+                    npcUnbekanntePerson.Says("Nimm nicht die Treppe links runter. Sei gewarnt!!");
+                }
                 System.out.println("Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
-                continue;
+            }
+            else if (sPickorGo.equals("go treppe links")) {
+                    System.out.println();
+                    System.out.println("Du bist nun im Treppenhaus.");
+                    spieler.move(treppe);
+                    System.out.println();
+                    treppeLinks();
+            }
+
+            else if(sPickorGo.equals("show inventory")){
+                System.out.println();
+                spieler.getInventory();
+                System.out.println();
+                System.out.println("Was willst du als nächstes tun?");
+                sPickorGo = scanner.nextLine();
+            }
+            else if(sPickorGo.equals("go gang rechts")){
+                System.out.println();
+                System.out.println("Du siehst einen schwachen Mondschein  am Ende des Ganges aufleuchten.");
+                System.out.println("Du gehst den rechten Gang entlang und bemerkst, dass alle Türen auf dem Weg geschlossen sind. ");
+                System.out.println("Du stehst im Treppenhaus. Was willst du ales nächstes machen?");
+                System.out.println("Gib   go ein um dich im Raum zum Beispiel zu Türen oder Fenstern, oder im Treppenhaus zu bewegen");
+                System.out.println();
+                sPickorGo = scanner.nextLine();
+
+                if (sPickorGo.equals("go treppe hoch")) {
+                    System.out.println();
+                    System.out.println("Du nimmst die Treppe nach oben und triffst auf eine weitere unbekannte Person zu!");
+                    System.out.println();
+                    spieler.move(zweitesOG);
+                    zweitesOG();
+                }
+
             }
             else {
                 System.out.println("Wie wäre es denn mit der Idee die Taschenlampe zu benutzen?");
                 System.out.println();
                 System.out.println("Was willst du als nächstes tun?");
-                sPickorGo = scanner.nextLine().toLowerCase();
-                continue;
+                sPickorGo = scanner.nextLine().toLowerCase();;
             }
         }
-
     }
-
+    public static void treppeLinks()
+    {
+        System.out.println();
+        System.out.println("Der Zombie Schulleiter überrascht dich von der Seite und greift dich an!");
+        spieler.setHealthPoints(0);
+        System.exit(0);
+    }
     //gude test bitte ignorieren danke
 
-
+    public static void zweitesOG()
+    {
+        System.out.println();
+        //hier kommt noch das Szenario gegen BRÜHNE, der wahre Endgegner!!
+    }
 }// end of class TextAdventure

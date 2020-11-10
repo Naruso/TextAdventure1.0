@@ -10,6 +10,7 @@ public class Raum extends Objekt{
     private boolean bItem;
     private Gegenstand item;
     public boolean npc;
+    private NPC npcPlaceHolder;
     private ArrayList<String> items = new ArrayList<>();
     // Ende Attribute
 
@@ -68,6 +69,25 @@ public class Raum extends Objekt{
         this.anzahlFenster = anzahlFenster;
         this.npc = npc;
         this.items.add(item.getName());
+        this.items.add(tuer1.getName());
+    }
+    public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Tuer tuer1, Tuer treppe, NPC npcPlaceHolder)
+    {
+        this.name = name;
+        this.anzahlTueren = anzahlTueren;
+        this.anzahlFenster = anzahlFenster;
+        this.npc = npc;
+        this.items.add(npcPlaceHolder.getName());
+        this.items.add(tuer1.getName());
+        this.items.add(treppe.getName());
+    }
+    public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Tuer tuer1, NPC npcPlaceHolder)
+    {
+        this.name = name;
+        this.anzahlTueren = anzahlTueren;
+        this.anzahlFenster = anzahlFenster;
+        this.npc = npc;
+        this.items.add(npcPlaceHolder.getName());
         this.items.add(tuer1.getName());
     }
     public Raum(String name, int anzahlTueren, int anzahlFenster, boolean npc, Gegenstand item, Fenster fenster1, Fenster fenster2, Tuer tuer1, Tuer tuer2)

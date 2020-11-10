@@ -8,6 +8,8 @@ public class Character extends Objekt {
     public Raum standort;
     private boolean _hasItem = false;
     public ArrayList<String> items = new ArrayList<>();
+    // Eine ArrayList mit dem Datentyp Gegenstand - das will ich morgen richtig einsetzen FYI
+    public ArrayList<Gegenstand> itemz = new ArrayList<>();
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
@@ -51,6 +53,10 @@ public class Character extends Objekt {
     public void setAbility(String abilityNeu) {
         ability = abilityNeu;
     }
+    /*public void getInventory()
+    {
+        System.out.println(items.toString());
+    }*/
     public void getInventory()
     {
         System.out.println(items.toString());
@@ -60,6 +66,19 @@ public class Character extends Objekt {
         if (item != null)
         {
             items.add(item.getName());
+            System.out.println("Du hast das Item " + item.getName() + " erhalten.");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public boolean pickItemV2(Gegenstand item)
+    {
+        if (item != null)
+        {
+            itemz.add(item);
             System.out.println("Du hast das Item " + item.getName() + " erhalten.");
             return true;
         }
@@ -81,7 +100,6 @@ public class Character extends Objekt {
         }
         return _hasItem;
     }
-
     public void useItem(Gegenstand item)
     {
         if (items.contains(item.name)) {
@@ -91,7 +109,6 @@ public class Character extends Objekt {
         else {
             System.out.println("Du kannst nicht etwas benutzen, was du nicht hast!");
         }
-
     }
 
 
