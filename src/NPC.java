@@ -1,10 +1,10 @@
-public class NPC {
+public class NPC extends Objekt {
 
     // Anfang Attribute
-    private String name;
     public boolean loot;
     public int healthPoints;
     public int damage;
+    public boolean isDead = false;
     // Ende Attribute
 
     // Anfang Konstruktor
@@ -37,7 +37,16 @@ public class NPC {
     }
 
     public void setHealthPoints(int healthPointsNeu) {
+
         healthPoints = healthPointsNeu;
+        if (healthPoints <= 0)
+        {
+            System.out.println("Du hast " + name + " besiegt!");
+        }
+        else
+        {
+            System.out.println(healthPoints +" HP übrig. Was willst du tun?");
+        }
     }
 
     public int getDamage() {
@@ -46,6 +55,12 @@ public class NPC {
 
     public void setDamage(int damageNeu) {
         damage = damageNeu;
+    }
+
+
+    public void Says(String text)
+    {
+        System.out.println(text);
     }
 
     // Ende Methoden

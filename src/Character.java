@@ -100,7 +100,6 @@ public class Character extends Objekt {
         }
         return _hasItem;
     }
-
     public void useItem(Gegenstand item)
     {
         if (items.contains(item.name)) {
@@ -110,7 +109,6 @@ public class Character extends Objekt {
         else {
             System.out.println("Du kannst nicht etwas benutzen, was du nicht hast!");
         }
-
     }
 
 
