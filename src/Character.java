@@ -53,10 +53,7 @@ public class Character extends Objekt {
     public void setAbility(String abilityNeu) {
         ability = abilityNeu;
     }
-    /*public void getInventory()
-    {
-        System.out.println(items.toString());
-    }*/
+
     public void getInventory()
     {
         System.out.println(items.toString());

@@ -13,14 +13,13 @@ public class Anwendung {
     static boolean roomChanged = false;
 
     //Spielercharakter wird erstellt
-    static Character spieler = new Character(null, 100, "Gude sagen");
+    static Character spieler = new Character(null, 100, "trifft falsche Entscheidungen");
 
     //Generiere NPCs
     public static NPC npcSchulleiter = new NPC("Schulleiter", false, 500, 30);
     public static NPC npcUnbekanntePerson = new NPC("Unbekannte Person", false, 20, 10);
     public static NPC npcZombieSchulleiter = new NPC( "Zombier Schulleiter", false, 1000, 100);
     public static NPC npcBruehne = new NPC("Brühne", true, 100, 10);
-    NPC nPC3 = new NPC("Person im Flur", true, 1, 0);
 
     //Gegenstände
     static Gegenstand iSmartphone = new Gegenstand("Smartphone", false, 0);
@@ -29,7 +28,6 @@ public class Anwendung {
     static Gegenstand iLehrerPult = new Gegenstand("Lehrerpult", false, 0);
     static Gegenstand iDeckenplatte = new Gegenstand("Deckenplatte", true, 0);
     static Gegenstand iSchluesselR107 = new Gegenstand("Key107", true, 0);
-    static Gegenstand item3 = new Gegenstand("keine Gegenstände", false, 0);
     static Gegenstand iLegendaererFeuerloescher = new Gegenstand("Legendärer Feuerlöscher", true, 170);
 
     //Fenster
@@ -42,7 +40,6 @@ public class Anwendung {
     //Türen im ersten Raum III-107
     static Tuer tuerLinks107 = new Tuer("Tür 108", true);
     static Tuer tuerRechts107 = new Tuer("Tür Flur", false);
-    //static Tuer tuerRaum108 = new Tuer("Tür rechts", false);
 
     //Türen im zweiten Raum III-108
     static Tuer tuerLinks108 = new Tuer("Tür 107", true);
@@ -51,25 +48,20 @@ public class Anwendung {
     //Türen und Treppen im Flur
     static Tuer tuerTreppeRunter = new Tuer ("Treppe links", true);
     static Tuer tuerZumFlur2 = new Tuer ("Flur rechts", true);
+    static Tuer tuer107 = new Tuer("Tür 107", false);
 
     //Türen und Treppen imr Flur rechts
     static Tuer tuerTreppe2OG = new Tuer ("Treppe hoch", true);
     static Tuer tuerTreppeEG = new Tuer ("Treppe runter", true);
-
-
-
-
     static Tuer tuerZumFoyer = new Tuer("hintere Tür", false);
 
     //Räume
     static Raum raum107 = new Raum("Raum III-107", 2, 2, false, iSmartphone, fensterRaum107, fenster2Raum107, tuerRechts107, tuerLinks107);
     static Raum raum108 = new Raum("Raum III-108", 2, 1, false, iTaschenlampe, iLosesKabel, iLehrerPult, iDeckenplatte, iSchluesselR107, fensterRaum108, tuerFlur, tuerLinks108);
-    static Raum flur = new Raum("Flur", 5, 0, true, tuerZumFlur2, tuerTreppeRunter, npcUnbekanntePerson);
+    static Raum flur = new Raum("Flur", 5, 0, true, tuer107, tuerZumFlur2, tuerTreppeRunter, npcUnbekanntePerson);
     static Raum treppe = new Raum( "Treppe links", 2, 0,true, tuerTreppeRunter, tuerZumFoyer, npcZombieSchulleiter );
     static Raum flurRechts = new Raum("rechten Flur", 0,0,false, tuerTreppe2OG,tuerTreppeEG);
     static Raum zweitesOG = new Raum("2. Obergeschoss", 4, 2, true, tuerZumFlur2, npcBruehne);
-    //Raum raum2OG = new Raum("Raum 2.OG", 1, 1, true, item5);
-
 
     //Initialisierung der Klassen abgeschlossen
 
@@ -176,6 +168,7 @@ public class Anwendung {
                 System.out.println("------------------------------------------------");
                 System.out.println("------------------------------------------------");
                 System.out.println("------------------------------------------------");
+                System.out.println();
                 spieler.move(raum108);
                 roomChanged = true;
                 System.out.println();
@@ -221,7 +214,7 @@ public class Anwendung {
         System.out.println(">go< um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
         System.out.println("oder >use< um Gegenstände in deinem Inventar zu benutzen.");
         System.out.println("Mit >show inventory< kannst du dir dein Inventar anzeigen lassen.");
-       // String sPickorGo;
+
         sPickorGo = scanner.nextLine().toLowerCase();
         while (true) {
             if (sPickorGo.equals("pick taschenlampe")) {
@@ -229,7 +222,6 @@ public class Anwendung {
                 System.out.println("Schau doch mal auf dem Lehrerpult nach, vielleicht liegt die Taschenlampe da.");
                 System.out.println("Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
-                //continue;
             }
             else if (sPickorGo.equals("pick loses stromkabel")) {
                 System.out.println();
@@ -266,7 +258,6 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
-                //continue;
             }
             else if (sPickorGo.equals("go deckenplatte")) {
                 System.out.println();
@@ -297,7 +288,6 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
-
             }
             else if (sPickorGo.equals("pick key107")) {
                 System.out.println();
@@ -311,7 +301,6 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("Hier kommst du nicht raus! Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
-
             }
             else if (sPickorGo.equals("go tür 107")) {
                 System.out.println();
@@ -319,6 +308,7 @@ public class Anwendung {
                 System.out.println("------------------------------------------------");
                 System.out.println("------------------------------------------------");
                 System.out.println("------------------------------------------------");
+                System.out.println();
                 spieler.move(raum107);
                 raum107();
             }
@@ -386,7 +376,6 @@ public class Anwendung {
                 System.out.println("Im Flur ist es stockdunkel und du siehst nichts. Schreibe >use Taschenlampe< um die Taschenlampe anzuschalten.");
                 sLook3 = scanner.nextLine().toLowerCase();
             }
-
             while (!sLook3.equals("use taschenlampe"));
                 System.out.println();
                 System.out.println("Du benutzt deine Taschenlampe und kannst jemanden am Ende des Flurs erkennen.");
@@ -443,7 +432,6 @@ public class Anwendung {
                             System.out.println();
                             System.out.println("Dein Gegner steht noch. Was willst du als nächstes tun?");
                         }
-
                     }
                 }
                 else {
@@ -461,6 +449,16 @@ public class Anwendung {
                 System.out.println("------------------------------------------------");
                 spieler.move(treppe);
                 treppeLinks();
+            }
+            else if (sPickorGo.equals("go tür 107")) {
+                System.out.println();
+                System.out.println("Du gehst wieder zurück in Raum III-107.");
+                System.out.println("------------------------------------------------");
+                System.out.println("------------------------------------------------");
+                System.out.println("------------------------------------------------");
+                System.out.println();
+                spieler.move(raum107);
+                raum107();
             }
             else if (sPickorGo.equals("go flur rechts")) {
                 System.out.println();
