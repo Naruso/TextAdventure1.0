@@ -3,19 +3,18 @@ import java.util.ArrayList;
 public class Character extends Objekt {
 
     // Anfang Attribute
-    private int healthPoints;
     public String ability;
     public Raum standort;
     private boolean _hasItem = false;
     public ArrayList<String> items = new ArrayList<>();
     // Eine ArrayList mit dem Datentyp Gegenstand - das will ich morgen richtig einsetzen FYI
-    public ArrayList<Gegenstand> itemz = new ArrayList<>();
+    //public ArrayList<Gegenstand> itemz = new ArrayList<>();
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
     {
         this.name = name;
-        this.healthPoints = healthPoints;;
+        this.healthPoints = healthPoints;
         this.ability = ability;
     }
 
@@ -71,29 +70,19 @@ public class Character extends Objekt {
             return false;
         }
     }
-    public boolean pickItemV2(Gegenstand item)
-    {
-        if (item != null)
-        {
-            itemz.add(item);
-            System.out.println("Du hast das Item " + item.getName() + " erhalten.");
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 
     public void move(Raum zielRaum)
     {
         standort = zielRaum;
+        System.out.println();
         System.out.println("Du befindest dich nun im " + standort.getName() + ".");
     }
     public boolean hasItem(Gegenstand item)
     {
         if (items.contains(item.name)) {
             _hasItem = true;
+        } else {
+            _hasItem = false;
         }
         return _hasItem;
     }

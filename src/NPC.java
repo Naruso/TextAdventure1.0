@@ -2,7 +2,7 @@ public class NPC extends Objekt {
 
     // Anfang Attribute
     public boolean loot;
-    public int healthPoints;
+    //public int healthPoints;
     public int damage;
     public boolean isDead = false;
     // Ende Attribute
@@ -45,7 +45,7 @@ public class NPC extends Objekt {
         }
         else
         {
-            System.out.println(healthPoints +" HP übrig. Was willst du tun?");
+            System.out.println("Dein Gegner "+getName()+ " hat noch "+ healthPoints +" HP übrig!");
         }
     }
 

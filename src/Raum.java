@@ -5,12 +5,7 @@ public class Raum extends Objekt{
     // Anfang Attribute
     public int anzahlTueren;
     public int anzahlFenster;
-    private Fenster fenster;
-    private Tuer tuer;
-    private boolean bItem;
-    private Gegenstand item;
     public boolean npc;
-    private NPC npcPlaceHolder;
     private ArrayList<String> items = new ArrayList<>();
     // Ende Attribute
 

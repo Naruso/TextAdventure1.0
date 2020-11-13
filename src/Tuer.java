@@ -1,4 +1,4 @@
-public class Tuer {
+public class Tuer{
 
     // Anfang Attribute
     public String name;
