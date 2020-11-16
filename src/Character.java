@@ -7,8 +7,6 @@ public class Character extends Objekt {
     public Raum standort;
     private boolean _hasItem = false;
     public ArrayList<String> items = new ArrayList<>();
-    // Eine ArrayList mit dem Datentyp Gegenstand - das will ich morgen richtig einsetzen FYI
-    //public ArrayList<Gegenstand> itemz = new ArrayList<>();
     // Ende Attribute
 
     public Character (String name, int healthPoints , String ability)
@@ -19,17 +17,10 @@ public class Character extends Objekt {
     }
 
     // Anfang Methoden
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String nameNeu) {
-        name = nameNeu;
-    }
-
-    public int getHealthPoints() {
+    /*public int getHealthPoints() {
         return healthPoints;
-    }
+    }*/
 
     public void setHealthPoints(int healthPointsNeu)
     {
@@ -79,11 +70,7 @@ public class Character extends Objekt {
     }
     public boolean hasItem(Gegenstand item)
     {
-        if (items.contains(item.name)) {
-            _hasItem = true;
-        } else {
-            _hasItem = false;
-        }
+        _hasItem = items.contains(item.name);
         return _hasItem;
     }
     public void useItem(Gegenstand item)

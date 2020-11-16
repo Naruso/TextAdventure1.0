@@ -1,7 +1,6 @@
-public class Fenster extends Raum{
+public class Fenster extends Objekt{
 
     // Anfang Attribute
-    public String name;
     private boolean offen;
     // Ende Attribute
 
@@ -12,18 +11,9 @@ public class Fenster extends Raum{
         this.name = name;
         this.offen = offen;
     }
-
-
+    //Ende Konstruktor
 
     // Anfang Methoden
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String nameNeu) {
-        name = nameNeu;
-    }
-
     public boolean getOffen() {
         return offen;
     }

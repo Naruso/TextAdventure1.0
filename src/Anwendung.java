@@ -14,7 +14,7 @@ public class Anwendung {
 
     //Generiere NPCs
     public static NPC npcUnbekanntePerson = new NPC("Unbekannte Person", false, 20, 10);
-    public static NPC npcZombieSchulleiter = new NPC( "Zombier Schulleiter", false, 1000, 100);
+    public static NPC npcZombieSchulleiter = new NPC( "Zombie Schulleiter", false, 1000, 100);
     public static NPC npcBruehne = new NPC("Brühne", true, 100, 10);
 
     //Gegenstände
@@ -39,7 +39,7 @@ public class Anwendung {
 
     //Türen im zweiten Raum III-108
     static Tuer tuerLinks108 = new Tuer("Tür 107", true);
-    static Tuer tuerFlurimRaum108 = new Tuer("Tür hinten", false);
+    static Tuer tuerFlurimRaum108 = new Tuer("Tür Flur", false);
 
     //Türen und Treppen im Flur
     static Tuer tuerTreppeRunter = new Tuer ("Treppe links", true);
@@ -110,7 +110,6 @@ public class Anwendung {
         raum107();
     }
 
-
     //Erster Raum
     public static void raum107() {
         String sLook;
@@ -145,7 +144,7 @@ public class Anwendung {
                 System.out.println();
                 tuerRechts107.isLocked();
                 System.out.println();
-                if (spieler.items.contains("Key107")) {
+                if (spieler.hasItem(iSchluesselR107)) {
                     System.out.println("Du versuchst ob der gefundene Schlüssel passt.....");
                     System.out.println("Der Schlüssel passt, du kannst die Tür aufschließen und gehst hindurch.");
                     System.out.println();
@@ -335,38 +334,6 @@ public class Anwendung {
                 System.out.println("Hier kommst du nicht raus! Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
             }
-            /*else if (sPickorGo.equals("look")) {
-                System.out.println();
-                System.out.println("Folgende Objekte befinden sich im Raum: " + raum108.getItems());
-                System.out.println();
-                System.out.println("Gib  pick  ein um einen Gegendstand aufzunehmen");
-                System.out.println("go  um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
-                System.out.println("oder use um Gegenstände in deinem Inventar zu benutzen.");
-                sPickorGo = scanner.nextLine().toLowerCase();
-                if (sPickorGo.equals("go lehrerpult") && raum108.getItems().contains("Taschenlampe")) {
-                    System.out.println();
-                    System.out.println("Auf dem Lehrerpult liegt eine Taschenlampe und einige Dokumente.");
-                    System.out.println("Gib pick ein um die Taschenlampe aufzunehmen!");
-                    sPickorGo = scanner.nextLine().toLowerCase();
-                    if (sPickorGo.equals("pick")) {
-                        spieler.pickItem(iTaschenlampe);
-                        raum108.removeItems(0);
-                        System.out.println("Du hast " + iTaschenlampe.getName() + " in dein Inventar gepackt!");
-                    }
-                }
-                else if (sPickorGo.equals("go tür links")) {
-                    System.out.println();
-                    System.out.println("Du gehst wieder zurück in Raum III-107.");
-                    System.out.println();
-                    spieler.move(raum107);
-                    raum107();
-                }
-                else{
-                    System.out.println();
-                    System.out.println("Auf dem Lehrerpult liegen einige Dokumente.");
-                    sPickorGo = scanner.nextLine().toLowerCase();
-                }
-            }*/
             else if(sPickorGo.equals("show inventory")){
                 System.out.println();
                 spieler.getInventory();
@@ -551,6 +518,7 @@ public class Anwendung {
                     System.out.println();
                     System.out.println("Du gehst die Treppe runter und bemerkst, dass die Hintertür offen ist.");
                     System.out.println("Der Zombie Schulleiter rennt auf dich zu. Du hast keine Chance die offene Hintertür zu nehmen.");
+                    System.out.println("Dir bleibt nichts Anderes übrig als gegen den Zombie Schulleiter zu kämpfen.");
                     System.out.println("Gib >attack< ein, um den Gegner anzugreifen.");
                     sPickorGo = scanner.nextLine();
                     while (true) {
@@ -606,17 +574,17 @@ public class Anwendung {
     public static void treppeLinks()
     {
         spieler.standort = treppe;
+        String sPickorGo;
         System.out.println();
         System.out.println("Du kannst die Treppe hoch oder die Treppe runter gehen.");
         System.out.println("Gib >go Treppe hoch< oder >go Treppe runter< ein, um die Treppe entweder hoch oder runter zu gehen.");
         System.out.println("Mit >go Flur< kommst du wieder zurück in den Flur.");
-        System.out.println();
         while (spieler.standort.equals(treppe)) {
-            String sPickorGo;
             sPickorGo = scanner.nextLine().toLowerCase();
             if (sPickorGo.equals("go treppe hoch")) {
                 System.out.println();
                 System.out.println("Die Treppe nach oben ist eingestürtzt. Du kommst hier nicht hoch.");
+                System.out.println("Was willst du als nächstes tun?");
             }
             else if (sPickorGo.equals("go treppe runter")) {
                 System.out.println();
@@ -624,7 +592,7 @@ public class Anwendung {
                 spieler.setHealthPoints(0);
                 System.exit(0);
             }
-            else if (sPickorGo.equals("go flur")) {
+            else if (sPickorGo.equals("go tür flur")) {
                 System.out.println();
                 System.out.println("Du entscheidest dich dafür lieber wieder zurück zu gehen.");
                 System.out.println();
@@ -638,7 +606,7 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
                 System.out.println("Was willst du als nächstes tun?");
-                sPickorGo = scanner.nextLine().toLowerCase();
+                //sPickorGo = scanner.nextLine().toLowerCase();
             }
         }
     }//end of treppe links
@@ -681,7 +649,7 @@ public class Anwendung {
                         System.out.println();
                         System.out.println("Gib >go treppe runter< ein, um wieder runter zu gehen.");
                         sPickorGo = scanner.nextLine();
-                        while (true) {
+                        while (spieler.standort.equals(zweitesOG)) {
                             if (sPickorGo.equals("go treppe runter")) {
                                 System.out.println();
                                 System.out.println("Du gehst wieder die Treppe hinunter.");
