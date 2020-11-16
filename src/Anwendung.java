@@ -422,51 +422,49 @@ public class Anwendung {
         sPickorGo = scanner.nextLine().toLowerCase();
 
         while (spieler.standort.equals(flur)) {
-            if (sPickorGo.equals("go unbekannte person")) {
-                System.out.println();
-                npcUnbekanntePerson.Says("Unbekannte Person: Hallo " + spieler.getName() + ",was gibt's?");
-                System.out.println();
-                System.out.println("Was willst du als nächstes tun? Gib >attack< ein, um die unbekannte Person anzugreifen");
-                System.out.println("oder >talk<, um mit der Person zu reden.");
-                sPickorGo = scanner.nextLine();
-                if (sPickorGo.equals("attack")) {
-                    while (!npcUnbekanntePerson.isDead) {
-                        if (!sPickorGo.equals("attack")) {
-                            System.out.println();
-                            System.out.println("falsche Eingabe....");
-                            System.out.println("Was willst du als nächstes tun?");
-                            sPickorGo = scanner.nextLine().toLowerCase();
-                        } else {
-
-                            System.out.println();
-                            int tempHpNpc = npcUnbekanntePerson.getHealthPoints() - iTaschenlampe.damage;
-                            npcUnbekanntePerson.setHealthPoints(tempHpNpc);
-                            int tempHpPlayer = spieler.getHealthPoints() - npcUnbekanntePerson.getDamage();
-                            spieler.setHealthPoints(tempHpPlayer);
-                            if (spieler.getHealthPoints() <= 0) {
-                                System.out.println("Du hast den Kampf verloren und bist gestorben!");
-                                System.exit(0);
-                            }
-                            if (npcUnbekanntePerson.getHealthPoints() <= 0) {
-                                npcUnbekanntePerson.isDead = true;
-                                System.out.println("Du hast den Kampf gewonnen!");
-                            }
-                            else {
+                if (sPickorGo.equals("go unbekannte person")) {
+                    System.out.println();
+                    npcUnbekanntePerson.Says("Unbekannte Person: Hallo " + spieler.getName() + ",was gibt's?");
+                    System.out.println();
+                    System.out.println("Was willst du als nächstes tun? Gib >attack< ein, um die unbekannte Person anzugreifen");
+                    System.out.println("oder >talk<, um mit der Person zu reden.");
+                    sPickorGo = scanner.nextLine();
+                    if (sPickorGo.equals("attack")) {
+                        while (!npcUnbekanntePerson.isDead) {
+                            if (!sPickorGo.equals("attack")) {
                                 System.out.println();
-                                System.out.println("Dein Gegner steht noch. Was willst du als nächstes tun?");
-                                System.out.println("Folgende Objekte befinden sich im Raum: " + flur.getItems());
-                                sPickorGo = scanner.nextLine();
+                                System.out.println("falsche Eingabe....");
+                                System.out.println("Was willst du als nächstes tun?");
+                                sPickorGo = scanner.nextLine().toLowerCase();
+                            } else {
+                                System.out.println();
+                                int tempHpNpc = npcUnbekanntePerson.getHealthPoints() - iTaschenlampe.damage;
+                                npcUnbekanntePerson.setHealthPoints(tempHpNpc);
+                                int tempHpPlayer = spieler.getHealthPoints() - npcUnbekanntePerson.getDamage();
+                                spieler.setHealthPoints(tempHpPlayer);
+                                if (spieler.getHealthPoints() <= 0) {
+                                    System.out.println("Du hast den Kampf verloren und bist gestorben!");
+                                    System.exit(0);
+                                }
+                                if (npcUnbekanntePerson.getHealthPoints() <= 0) {
+                                    npcUnbekanntePerson.isDead = true;
+                                    flur.removeItems(0);
+                                    System.out.println("Du hast den Kampf gewonnen!");
+                                } else {
+                                    System.out.println();
+                                    System.out.println("Dein Gegner steht noch. Was willst du als nächstes tun?");
+                                    System.out.println("Folgende Objekte befinden sich im Raum: " + flur.getItems());
+                                    sPickorGo = scanner.nextLine();
+                                }
+                            }
                         }
-                        }
+                    } else {
+                        npcUnbekanntePerson.Says("Nimm nicht die Treppe links runter. Sei gewarnt!!");
                     }
+                    System.out.println();
+                    System.out.println("Was willst du als nächstes tun?");
+                    sPickorGo = scanner.nextLine().toLowerCase();
                 }
-                else {
-                    npcUnbekanntePerson.Says("Nimm nicht die Treppe links runter. Sei gewarnt!!");
-                }
-                System.out.println();
-                System.out.println("Was willst du als nächstes tun?");
-                sPickorGo = scanner.nextLine().toLowerCase();
-            }
             else if (sPickorGo.equals("go treppe links")) {
                 System.out.println();
                 System.out.println("Du bist nun im Treppenhaus.");
