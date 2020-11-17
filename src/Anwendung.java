@@ -504,20 +504,13 @@ public class Anwendung {
     public static void flurRechts() {
         spieler.standort = flurRechts;
         String sPickorGo;
-        if (spieler.hasItem(iLegendaererFeuerloescher)) {
-            do {
-                System.out.println();
-                System.out.println("Was willst du als nächstes machen?");
-                System.out.println("Gib >look< ein, um dich umzusehen.");
-                sPickorGo = scanner.nextLine().toLowerCase();
-            }
-            while (!sPickorGo.equals("look"));
-        } else {
+        if (!spieler.hasItem(iLegendaererFeuerloescher)) {
 
-        System.out.println();
-        System.out.println("Du siehst einen schwachen Mondschein am Ende des Ganges aufleuchten.");
-        System.out.println("Du gehst den Flur entlang und bemerkst, dass alle Türen auf dem Weg verschlossen sind.");
-        System.out.println("Du stehst am Ende des Flurs in einem Treppenhaus.");
+            System.out.println();
+            System.out.println("Du siehst einen schwachen Mondschein am Ende des Ganges aufleuchten.");
+            System.out.println("Du gehst den Flur entlang und bemerkst, dass alle Türen auf dem Weg verschlossen sind.");
+            System.out.println("Du stehst am Ende des Flurs in einem Treppenhaus.");
+        }
         do {
             System.out.println();
             System.out.println("Was willst du als nächstes machen?");
@@ -525,7 +518,6 @@ public class Anwendung {
             sPickorGo = scanner.nextLine().toLowerCase();
         }
         while (!sPickorGo.equals("look"));
-        }
         System.out.println();
         System.out.println("Folgende Objekte befinden sich im Raum: " + flurRechts.getItems());
         System.out.println();
