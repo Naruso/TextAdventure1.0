@@ -23,7 +23,7 @@ public class Anwendung {
     static Gegenstand iLosesKabel = new Gegenstand("loses Stromkabel", false, 100);
     static Gegenstand iLehrerPult = new Gegenstand("Lehrerpult", false, 0);
     static Gegenstand iDeckenplatte = new Gegenstand("Deckenplatte", true, 0);
-    static Gegenstand iSchluesselR107 = new Gegenstand("Key107", true, 0);
+    static Gegenstand iSchluesselR107 = new Gegenstand("Schlüssel107", true, 0);
     static Gegenstand iLegendaererFeuerloescher = new Gegenstand("Legendärer Feuerlöscher", true, 170);
 
     //Fenster
@@ -114,7 +114,6 @@ public class Anwendung {
     public static void raum107() {
         String sLook;
         spieler.standort = raum107;
-
         do {
             System.out.println("Was möchtest du tun? Schreibe >look< um dich umzusehen...");
             sLook = scanner.nextLine().toLowerCase();
@@ -225,8 +224,7 @@ public class Anwendung {
         System.out.println("Folgende Objekte befinden sich im Raum: " + raum108.getItems());
         System.out.println();
         System.out.println("Gib >pick< ein um einen Gegendstand zu nehmen,");
-        System.out.println(">go< um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen");
-        System.out.println("oder >use< um Gegenstände in deinem Inventar zu benutzen.");
+        System.out.println(">go< um dich im Raum zum Beispiel zu Türen oder Fenstern zu bewegen.");
         System.out.println("Mit >show inventory< kannst du dir dein Inventar anzeigen lassen.");
         sPickorGo = scanner.nextLine().toLowerCase();
 
@@ -320,9 +318,14 @@ public class Anwendung {
                 sPickorGo = scanner.nextLine().toLowerCase();
                 }
             }
-            else if (sPickorGo.equals("pick key107")) {
-                System.out.println();
-                System.out.println("Du weißt noch nicht wo der Schlüssel sein könnte.");
+            else if (sPickorGo.equals("pick schlüssel")) {
+                if (spieler.hasItem(iSchluesselR107)) {
+                    System.out.println();
+                    System.out.println("Du hast den Schlüssel bereits im Inventar!");
+                } else {
+                    System.out.println();
+                    System.out.println("Du weißt noch nicht wo der Schlüssel sein könnte.");
+                }
                 System.out.println("Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine().toLowerCase();
             }
@@ -483,6 +486,15 @@ public class Anwendung {
                 System.out.println("Was willst du als nächstes tun?");
                 sPickorGo = scanner.nextLine();
             }
+            else if(sPickorGo.equals("use taschenlampe"))
+            {
+                    System.out.println();
+                    spieler.useItem(iTaschenlampe);
+                    System.out.println("Die Taschenlampe leuchtet bereits. . .");
+                    System.out.println();
+                    System.out.println("Was willst du als nächstes tun?");
+                    sPickorGo = scanner.nextLine().toLowerCase();
+            }
             else {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
@@ -540,9 +552,9 @@ public class Anwendung {
                     while (true) {
 
                         if (sPickorGo.equals("attack")) {
-                            npcZombieSchulleiter.setHealthPoints(170);
+                            int nerfedHP = 170;
                             System.out.println();
-                            int newHPNPC = npcZombieSchulleiter.getHealthPoints() - iLegendaererFeuerloescher.damage;
+                            int newHPNPC = nerfedHP - iLegendaererFeuerloescher.damage;
                             npcZombieSchulleiter.setHealthPoints(newHPNPC);
                             System.out.println();
                             won = true;
