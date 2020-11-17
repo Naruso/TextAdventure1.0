@@ -6,8 +6,6 @@ public class Anwendung {
     static boolean won = false;
     static boolean lost = false;
     static Scanner scanner = new Scanner(System.in);
-    static boolean roomChanged = false;
-    static Raum location;
 
     //Spielercharakter wird erstellt
     static Character spieler = new Character(null, 100, "trifft falsche Entscheidungen");
@@ -39,24 +37,23 @@ public class Anwendung {
 
     //Türen im zweiten Raum III-108
     static Tuer tuerLinks108 = new Tuer("Tür 107", true);
-    static Tuer tuerFlurimRaum108 = new Tuer("Tür Flur", false);
+    static Tuer tuerFlurImRaum108 = new Tuer("Tür Flur", false);
 
     //Türen und Treppen im Flur
-    static Tuer tuerTreppeRunter = new Tuer ("Treppe links", true);
+    static Tuer tuerTreppeLinks = new Tuer ("Treppe links", true);
     static Tuer tuerZumFlur2 = new Tuer ("Flur rechts", true);
     static Tuer tuer107 = new Tuer("Tür 107", false);
 
     //Türen und Treppen im Flur rechts
     static Tuer tuerTreppe2OG = new Tuer ("Treppe hoch", true);
     static Tuer tuerTreppeEG = new Tuer ("Treppe runter", true);
-    static Tuer tuerZumFoyer = new Tuer("hintere Tür", false);
     static Tuer tuerZumFlurZurueck = new Tuer ("Tür Flur", true);
 
     //Räume
     static Raum raum107 = new Raum("Raum III-107", 2, 2, false, iSmartphone, fensterRaum107, fenster2Raum107, tuerRechts107, tuerLinks107);
-    static Raum raum108 = new Raum("Raum III-108", 2, 1, false, iTaschenlampe, iLosesKabel, iLehrerPult, iDeckenplatte, iSchluesselR107, fensterRaum108, tuerFlurimRaum108, tuerLinks108);
-    static Raum flur = new Raum("Flur", 5, 0, true, tuer107, tuerZumFlur2, tuerTreppeRunter, npcUnbekanntePerson);
-    static Raum treppe = new Raum( "Treppenhaus links", 2, 0,true, tuerTreppeRunter, tuerZumFlurZurueck, npcZombieSchulleiter );
+    static Raum raum108 = new Raum("Raum III-108", 2, 1, false, iTaschenlampe, iLosesKabel, iLehrerPult, iDeckenplatte, iSchluesselR107, fensterRaum108, tuerFlurImRaum108, tuerLinks108);
+    static Raum flur = new Raum("Flur", 5, 0, true, tuer107, tuerZumFlur2, tuerTreppeLinks, npcUnbekanntePerson);
+    static Raum treppe = new Raum( "Treppenhaus links", 2, 0,true, tuerTreppeLinks, tuerZumFlurZurueck, npcZombieSchulleiter );
     static Raum flurRechts = new Raum("rechten Flur", 0,0,false, tuerTreppe2OG,tuerTreppeEG);
     static Raum zweitesOG = new Raum("2. Obergeschoss", 4, 2, true, tuerZumFlur2, npcBruehne);
 
