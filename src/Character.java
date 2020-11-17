@@ -77,7 +77,7 @@ public class Character extends Objekt {
     {
         if (items.contains(item.name)) {
             _hasItem = true;
-            System.out.println("Du benutzt " + item + "!");
+            System.out.println(item.getName() + " wird benutzt!");
         }
         else {
             System.out.println("Du kannst nicht etwas benutzen, was du nicht hast!");

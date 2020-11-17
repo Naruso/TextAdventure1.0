@@ -186,8 +186,24 @@ public class Anwendung {
                 System.out.println("Inventar: "); spieler.getInventory();
                 System.out.println();
                 System.out.println("Was willst du als nächstes tun?");
-                sPickorGo = scanner.nextLine();
+                sPickorGo = scanner.nextLine().toLowerCase();
                 }
+            else if(sPickorGo.equals("use smartphone"))
+            {
+                System.out.println();
+                spieler.useItem(iSmartphone);
+                if (spieler.hasItem(iSmartphone)) {
+                    if (!iSmartphone.benutzbar) {
+                        System.out.println("Das Smartphone schaltet sich aus! Der Akku müsste leer sein. . . ");
+                    } else {
+                        System.out.println("Das Smartphone scheint defekt zu sein.");
+                    }
+                } else {
+                    System.out.println("Du solltest erst das Smartphone nehmen.");
+                }
+                System.out.println("Was willst du als nächstes tun?");
+                sPickorGo = scanner.nextLine().toLowerCase();
+            }
             else {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
