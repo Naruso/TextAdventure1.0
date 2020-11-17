@@ -287,7 +287,7 @@ public class Anwendung {
                 }
                 else {
                 System.out.println();
-                System.out.println("Die Deckenplatte scheint lose zu sein. Du versuchst sie anzuheben und rauszunhemen.");
+                System.out.println("Die Deckenplatte scheint lose zu sein. Du versuchst sie anzuheben und rauszunehmen.");
                 System.out.println("...");
                 System.out.println("Dir fällt ein Schlüssel entgegen. Wofür der nur ist?");
                 System.out.println("Gib >pick Schlüssel< ein um den Schlüssel aufzunehmen!");
@@ -503,11 +503,21 @@ public class Anwendung {
 
     public static void flurRechts() {
         spieler.standort = flurRechts;
+        String sPickorGo;
+        if (spieler.hasItem(iLegendaererFeuerloescher)) {
+            do {
+                System.out.println();
+                System.out.println("Was willst du als nächstes machen?");
+                System.out.println("Gib >look< ein, um dich umzusehen.");
+                sPickorGo = scanner.nextLine().toLowerCase();
+            }
+            while (!sPickorGo.equals("look"));
+        } else {
+
         System.out.println();
         System.out.println("Du siehst einen schwachen Mondschein am Ende des Ganges aufleuchten.");
         System.out.println("Du gehst den Flur entlang und bemerkst, dass alle Türen auf dem Weg verschlossen sind.");
-        System.out.println("Du stehst im am Ende des Flurs in einem Treppenhaus.");
-        String sPickorGo;
+        System.out.println("Du stehst am Ende des Flurs in einem Treppenhaus.");
         do {
             System.out.println();
             System.out.println("Was willst du als nächstes machen?");
@@ -515,6 +525,7 @@ public class Anwendung {
             sPickorGo = scanner.nextLine().toLowerCase();
         }
         while (!sPickorGo.equals("look"));
+        }
         System.out.println();
         System.out.println("Folgende Objekte befinden sich im Raum: " + flurRechts.getItems());
         System.out.println();
@@ -631,7 +642,6 @@ public class Anwendung {
                 System.out.println();
                 System.out.println("falsche Eingabe....");
                 System.out.println("Was willst du als nächstes tun?");
-                //sPickorGo = scanner.nextLine().toLowerCase();
             }
         }
     }//end of treppe links
