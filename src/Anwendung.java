@@ -63,7 +63,7 @@ public class Anwendung {
     public static void main(String[] args) {
         System.out.println();
         System.out.println("-----------------Text-Adventure-----------------");
-        System.out.println("-------------------Akif & Tobi------------------");
+        System.out.println("----------------Akif & Tobi & Jan---------------");
         System.out.println("Hallo und willkommen bei unserem Text-Adventure. ");
         System.out.println("Gib >start< ein um das Spiel zu starten oder >exit< um das Spiel zu verlassen.");
         String eingabeStart = scanner.nextLine().toLowerCase();
